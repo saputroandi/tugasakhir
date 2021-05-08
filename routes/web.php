@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout');
-});
+    return view('landing.landing');
+})->name("landing");
 
 Route::get("/auth/login", [AuthController::class, "Login"])->name("auth.login");
 Route::get("/auth/register", [AuthController::class, "Register"])->name("auth.register");
+
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
+})->name("user.dashboard");
