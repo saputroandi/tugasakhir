@@ -3,10 +3,20 @@
   <div class="grid col-start-1 col-end-4 lg:col-end-2">
     <a href="{{ route("landing") }}" class="p-2 font-semibold text-xl lg:text-3xl">Buat-Surat.online</a>
   </div>
+  @guest
   <div class="hidden lg:grid grid-flow-col gap-3 lg:col-start-5 lg:col-end-6">
     <a href="{{ route("auth.login") }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Masuk</a>
     <a href="{{ route("auth.register") }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Daftar</a>
   </div>
+  @endguest
+  @if(Auth::user())
+  <div class="hidden lg:grid grid-flow-col gap-3 lg:col-start-5 lg:col-end-6">
+    <form action="{{ route("auth.logout") }}" method="post">
+      @csrf
+    <button type="submit" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Logout</button>
+    </form>
+  </div>
+  @endif
 
   {{-- menu mobile --}}
   <div class="menu-mobile grid col-end-7 lg:hidden">

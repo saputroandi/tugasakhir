@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>Home</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 </head>
 <body class="bg-buatbody">
 
@@ -12,7 +12,7 @@
         @include('include.navbar')
     </nav>
     
-    <div class="container mx-auto">
+    <div class="">
         @yield("content")
     </div>
 
