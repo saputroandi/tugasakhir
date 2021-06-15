@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerificationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -41,10 +43,32 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->email_verifikasi = false;
         $user->password = Hash::make($request->password);
+
+        $lastUser = User::all()->last();
+        if($lastUser)
+        {
+            $userActualId = $lastUser->user_id[9] + 1;
+        } else {
+            $userActualId = 1;
+        }
+        $getDate = date("Ymd",time());
+        $user->user_id = '2'.$getDate.$userActualId;
+
         $query = $user->save();
 
+        $UserNotConfirmedEmailYet = User::where('email', $request->email)->first();
+
+        $detailsMailBody = url('/') . '/email-confirmation/' . $UserNotConfirmedEmailYet->user_id ;
+
+        $details = [
+        'title' => 'Konfirmasi email anda dengan meng-klik tautan dibawah ini: ',
+        'body' => $detailsMailBody,
+        ];
+
+        Mail::to($request->email)->send(new VerificationMail($details));
+
         if($query){
-            return back()->with('success', 'Anda telah berhasil mendaftar');
+            return back()->with('success', 'Anda telah berhasil mendaftar silahkan cek email untuk verifikasi');
         } else {
             return back()->with('fail', 'Gagal mendaftar, terjadi kesalahan');
         }
@@ -73,5 +97,13 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/auth/login');
+    }
+
+    public function MailConfirmation(User $user)
+    {
+        $user->email_verifikasi = true;
+        $user->save();
+
+        return redirect('/auth/login')->with('success', 'Email anda sudah terverifikasi, silahkan login..');
     }
 }

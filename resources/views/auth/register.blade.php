@@ -9,12 +9,12 @@
       </div>
       @if (Session::get("success"))
           <div class="flex justify-center mt-2 w-full py-3 bg-green-500 opacity-75">
-            <span class="text-xs">{{ Session::get("success") }}</span>
+            <span class="text-xs text-center">{{ Session::get("success") }}</span>
           </div>
       @endif
       @if (Session::get("fail"))
           <div class="flex justify-center mt-2 w-full py-3 bg-red-500 opacity-75">
-            <span class="text-xs">{{ Session::get("fail") }}</span>
+            <span class="text-xs text-center">{{ Session::get("fail") }}</span>
           </div>
       @endif
       <div class="">

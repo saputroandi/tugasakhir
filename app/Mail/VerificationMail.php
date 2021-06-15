@@ -29,11 +29,8 @@ class VerificationMail extends Mailable
     public function build()
     {
         // return $this->subject('Mail from websitepercobaan.com')->view('emails.myTestMail');
-        return $this->subject('Mail from websitepercobaan.com')->view('emails.myTestMail')
-                    ->with(
-                    [
-                        'title' => 'Diki Alfarabi Hadi',
-                        'body' => 'www.malasngoding.com',
-                    ]);
+        return $this->subject('Mail from Buat-Surat')
+                    ->view('emails.verificationMailTemplate')
+                    ->with($this->details);
     }
 }

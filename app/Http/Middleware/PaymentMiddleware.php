@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AlreadyLogin
+class PaymentMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,10 +16,6 @@ class AlreadyLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if((Auth::user()) && (route('auth.login') == $request->url() || route('auth.register') == $request->url()))
-        {
-            return redirect('/dashboard');
-        }
         return $next($request);
     }
 }
