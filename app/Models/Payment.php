@@ -17,6 +17,11 @@ class Payment extends Model
     protected $primaryKey = 'payment_id';
     public $incrementing = false;
 
+    public function getRouteKeyName()
+    {
+        return 'payment_id';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

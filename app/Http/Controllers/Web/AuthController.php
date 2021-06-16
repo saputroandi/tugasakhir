@@ -47,12 +47,14 @@ class AuthController extends Controller
         $lastUser = User::all()->last();
         if($lastUser)
         {
-            $userActualId = $lastUser->user_id[9] + 1;
+            // $userActualId = $lastUser->user_id[9] + 1;
+            $userActualId = substr($lastUser->user_id, 9, 1) + 1;
         } else {
             $userActualId = 1;
         }
         $getDate = date("Ymd",time());
-        $user->user_id = '2'.$getDate.$userActualId;
+        $user->user_id = intval("2".$getDate.$userActualId);
+        // dd($user->user_id);
 
         $query = $user->save();
 

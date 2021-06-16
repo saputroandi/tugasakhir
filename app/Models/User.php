@@ -15,9 +15,16 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'user_id';
+
     public $incrementing = false;
+
     public function getRouteKeyName()
     {
         return 'user_id';
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id');
     }
 }

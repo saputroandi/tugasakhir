@@ -15,7 +15,7 @@
         <p>Rp. 10.000,-</p>
       </div>
       <div class="shadow-md hover:shadow-none">
-        <form action="{{ route('member.create', Auth::user()->user_id) }}" method="post">
+        <form action="{{ route('payment.save', Auth::user()->user_id) }}" method="post">
           @csrf
           <input type="hidden" name="member_type" value="1">
           <button class="p-2 rounded-md bg-buatbutton">Pilih</button>

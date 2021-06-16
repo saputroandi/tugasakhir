@@ -40,11 +40,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
     })->name("user.dashboard");
-
-    // member
-    Route::get('/member', [MemberController::class, "index"])->name("member.index");
-    Route::post('/member-create/{user:user_id}', [MemberController::class, "create"])->name("member.create");
-
+    
     // payment confirmation
-    Route::get('/payment-confirmation/',[PaymentController::class, "PaymentConfirmation"])->name("payment.confirmation");
+    Route::get('/payment-create', [PaymentController::class, "CreatePayment"])->name("payment.create");
+    Route::post('/payment-save/{user:user_id}', [PaymentController::class, "SavePayment"])->name("payment.save");
+    Route::get('/payment-confirmation',[PaymentController::class, "PaymentConfirmation"])->name("payment.confirmation");
+    Route::post('/payment-confirmation-save/{user:user_id}/{payment:payment_id}', [PaymentController::class, "SavePaymentConfirmation"])->name("payment.confirmation.save");
 });
