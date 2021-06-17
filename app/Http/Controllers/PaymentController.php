@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CustomHelper\CustomHelperController;
 use App\Mail\VerificationMail;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
+
+    protected $CustomHelperController;
+
+    public function __construct(CustomHelperController $CustomHelperController)
+    {
+        $this->CustomHelperController = $CustomHelperController;
+    }
+
     public function CreatePayment()
     {
         $data = [
@@ -22,18 +33,13 @@ class PaymentController extends Controller
     {
         $payment = new Payment;
         $payment->payment_status = 1;
+        $payment->user_id = $user->user_id;
 
         $lastPayment = Payment::all()->last();
-        if($lastPayment)
-        {
-            // $paymentActualId = $lastPayment->payment_id[9] + 1;
-            $paymentActualId = substr($lastPayment->payment_id, 9, 1) + 1;
-        } else {
-            $paymentActualId = 1;
-        }
-        $getDate = date("Ymd",time());
-        $payment->payment_id = intval('2'.$getDate.$paymentActualId);
-        $payment->user_id = $user->user_id;
+        $role = "2";
+
+        $payment->payment_id = $this->CustomHelperController->IdGenerator($lastPayment, $role);
+        
         $payment->save();
 
         $note = url('/') . '/payment-confirmation/' . $user->user_id;
@@ -56,6 +62,27 @@ class PaymentController extends Controller
 
     public function SavePaymentConfirmation(User $user, Payment $payment, Request $request)
     {
-        dd($request->file("proof_of_payment")->getClientOriginalName());
+        $request->validate([
+            "proof_of_payment" => "required|image|mimes:jpeg,jpg,png|max:1999",
+            "note" => "nullable|string",
+        ]);
+
+        $uploadedFile = $request->file("proof_of_payment");
+        $filenameWithExt = $request->file("proof_of_payment")->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file("proof_of_payment")->getClientOriginalExtension();
+        $saved_filename = Str::remove(' ', $filename)."_".time().".".$extension;
+        $path = Storage::putFileAs(
+            'public/proof_of_payment', $uploadedFile, $saved_filename
+        );
+
+        // update payment
+        $payment->payment_status = 2;
+        $payment->proof_of_payment = $saved_filename;
+        $payment->note = $request->note;
+        $payment->save();
+
+        // dd(Storage::url($path));
+        return redirect('/dashboard')->with('success', 'Tunggu maksimal 1x 24 jam untuk proses verifikasi pembayaran oleh admin, status pembayaran akan dikirim melalui email...');
     }
 }

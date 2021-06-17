@@ -3,15 +3,24 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomHelper\CustomHelperController;
 use App\Mail\VerificationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    protected $CustomHelperController;
+
+    public function __construct(CustomHelperController $CustomHelperController)
+    {
+        $this->CustomHelperController = $CustomHelperController;
+    }
+
     public function Login()
     {
         $data = [
@@ -45,16 +54,9 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
 
         $lastUser = User::all()->last();
-        if($lastUser)
-        {
-            // $userActualId = $lastUser->user_id[9] + 1;
-            $userActualId = substr($lastUser->user_id, 9, 1) + 1;
-        } else {
-            $userActualId = 1;
-        }
-        $getDate = date("Ymd",time());
-        $user->user_id = intval("2".$getDate.$userActualId);
-        // dd($user->user_id);
+        $role = "2";
+        
+        $user->user_id = $this->CustomHelperController->IdGenerator($lastUser, $role);
 
         $query = $user->save();
 

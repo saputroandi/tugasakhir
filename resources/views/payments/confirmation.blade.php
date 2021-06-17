@@ -19,10 +19,12 @@
         <div class="mx-8 mt-3 mb-1">
           <label for="proof_of_payment">Bukti Transfer</label>
           <input type="file" name="proof_of_payment" id="proof_of_payment" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " placeholder="Bukti Transfer">
+          <span class="text-xs text-red-600">@error('proof_of_payment') {{ $message }} @enderror</span>
         </div>
         <div class="mx-8 mt-3 mb-2">
           <label for="note">Catatan</label>
           <textarea name="note" id="note" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " placeholder="Catatan Opsional" rows="5"></textarea>
+          <span class="text-xs text-red-600">@error('note') {{ $message }} @enderror</span>
         </div>
       <div class="grid place-items-center mx-8">
         <button type="submit" class="w-full p-2 mb-5 bg-buatbutton font-medium rounded hover:bg-gray-600 hover:text-white">Konfirmasi</button>
