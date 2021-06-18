@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define("is_admin", function (User $user) {
+            return Str::substr($user->user_id, 0, 1) == 1;
+        });
+        
+        Gate::define("is_user", function (User $user) {
+            return Str::substr($user->user_id, 0, 1) == 2;
+        });
+
+
     }
 }

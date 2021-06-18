@@ -3,11 +3,11 @@
 @section('content')
 {{-- {{dd(Auth::user()->user_id,Auth::user()->payments->last()->payment_id)}} --}}
 <div class="flex max-w-full h-screen justify-center items-center">
-  <div class="flex flex-col p-4 w-10/12 bg-buatbgkomponen gap-2">
+  <div class="flex flex-col p-4 w-10/12 bg-buatbgkomponen gap-2 rounded-md">
     <p class="text-center font-medium text-3xl">Konfirmasi Pembayaran</p>
-    <div class="flex flex-col justify-center mx-8 border-solid border-1 border-black bg-yellow-200">
+    <div class="flex flex-col justify-center py-2 mx-8 border-solid border-1 border-black bg-yellow-200 rounded-md">
       <p class="text-red-500 font-semibold text-center">Perhatian :</p>
-      <p class="font-medium text-center">Bukti pembayaran harus berbentuk gambar dengan format jpg, jpeg, png, bmp, gif, svg, or webp</p>
+      <p class="font-medium text-center">Bukti pembayaran harus berbentuk gambar dengan format jpg, jpeg dan png</p>
       <p class="font-medium text-center">Ukuran maksimal 2MB</p>
     </div>
     <form action="{{ route('payment.confirmation.save', ["user" => Auth::user()->user_id, "payment" => Auth::user()->payments->last()->payment_id]) }}" enctype="multipart/form-data" method="post">

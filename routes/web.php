@@ -23,14 +23,18 @@ Route::get('/', function () {
     return view('landing.landing');
 })->name("landing");
 
-Route::middleware(['already.login'])->group(function () {
-    Route::get("/auth/login", [AuthController::class, "Login"])->name("auth.login");
-    Route::get("/auth/register", [AuthController::class, "Register"])->name("auth.register");
+Route::group([ 
+    "middleware" => "already.login",
+    "prefix" => "auth",
+    "as" => "auth."
+    ],function () {
+    Route::get("/login", [AuthController::class, "Login"])->name("login");
+    Route::get("/register", [AuthController::class, "Register"])->name("register");
+    Route::post("/login-user", [AuthController::class, "LoginUser"])->name("login-user");
+    Route::post("/register-user", [AuthController::class, "RegisterUser"])->name("register-user");
 });
 
-Route::post("/auth/register-user", [AuthController::class, "RegisterUser"])->name("auth.register-user");
 Route::get('/email-confirmation/{user}',[AuthController::class, "MailConfirmation"]);
-Route::post("/auth/login-user", [AuthController::class, "LoginUser"])->name("auth.login-user");
 
 Route::middleware(['auth'])->group(function () {
     // logout 
@@ -41,9 +45,14 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard.dashboard');
     })->name("user.dashboard");
     
-    // payment confirmation
-    Route::get('/payment-create', [PaymentController::class, "CreatePayment"])->name("payment.create");
-    Route::post('/payment-save/{user:user_id}', [PaymentController::class, "SavePayment"])->name("payment.save");
-    Route::get('/payment-confirmation',[PaymentController::class, "PaymentConfirmation"])->name("payment.confirmation");
-    Route::post('/payment-confirmation-save/{user:user_id}/{payment:payment_id}', [PaymentController::class, "SavePaymentConfirmation"])->name("payment.confirmation.save");
+    Route::group([
+        "prefix" => "payment",
+        "as" => "payment."
+    ], function(){
+        // payment confirmation
+        Route::get('/create', [PaymentController::class, "CreatePayment"])->name("create");
+        Route::post('/save/{user:user_id}', [PaymentController::class, "SavePayment"])->name("save");
+        Route::get('/confirmation',[PaymentController::class, "PaymentConfirmation"])->name("confirmation");
+        Route::post('/confirmation-save/{user:user_id}/{payment:payment_id}', [PaymentController::class, "SavePaymentConfirmation"])->name("confirmation.save");
+    });
 });

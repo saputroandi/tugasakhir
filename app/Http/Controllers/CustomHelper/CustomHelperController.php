@@ -24,7 +24,7 @@ class CustomHelperController extends Controller
             $actualId = 1;
         }
 
-        $id= intval($role.$getDate.$actualId);
+        $id = intval($role.$getDate.$actualId);
 
         return $id;
     }
