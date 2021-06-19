@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('landing.landing');
 })->name("landing");
 
+
+// auth
 Route::group([ 
     "middleware" => "already.login",
     "prefix" => "auth",
@@ -45,11 +47,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard.dashboard');
     })->name("user.dashboard");
     
+    // payment
     Route::group([
         "prefix" => "payment",
         "as" => "payment."
     ], function(){
-        // payment confirmation
         Route::get('/create', [PaymentController::class, "CreatePayment"])->name("create");
         Route::post('/save/{user:user_id}', [PaymentController::class, "SavePayment"])->name("save");
         Route::get('/confirmation',[PaymentController::class, "PaymentConfirmation"])->name("confirmation");

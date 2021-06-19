@@ -11,8 +11,12 @@
     <nav>
         @include('include.navbar')
     </nav>
+
     
-    <div class="">
+    <div class="flex justify-center">
+        @can('is_admin')
+            @include('include.sidebar')
+        @endcan
         @yield("content")
     </div>
 

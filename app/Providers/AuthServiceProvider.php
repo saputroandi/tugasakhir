@@ -35,6 +35,18 @@ class AuthServiceProvider extends ServiceProvider
             return Str::substr($user->user_id, 0, 1) == 2;
         });
 
+        Gate::define("have_choose_member", function (User $user) {
+            return count($user->payments) > 0;
+        });
+
+        Gate::define("have_not_choose_member", function (User $user) {
+            return count($user->payments) == 0;
+        });
+
+        Gate::define("not_confirm_payment_yet", function (User $user) {
+            return $user->payments->first()->payment_status == 1;
+        });
+
 
     }
 }
