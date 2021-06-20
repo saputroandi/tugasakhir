@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- {{ dd(Auth::user()->payments->first()->payment_status) }} --}}
-  <div class="flex items-center justify-center flex-col gap-10 max-h-full w-11/12">
+  <div class="flex items-center justify-center flex-col flex-grow gap-10 max-h-full my-6">
     @if (Session::get("success"))
     <div class="flex justify-center w-11/12 py-3 bg-green-500 opacity-75">
       <span class="text-xs text-center">{{ Session::get("success") }}</span>
@@ -13,6 +13,76 @@
       <span class="text-xs text-center">{{ Session::get("fail") }}</span>
     </div>
     @endif
-    <p class="text-9xl">{{ substr(Auth::user()->user_id, 0, 1) == 1 ? 'Admin' : Auth::user()->nama }}</p>
+    <div class="flex justify-center w-2/3 p-6 rounded-md shadow-lg bg-buatbgkomponen">
+      <div class="flex w-full p-1 flex-col items-center gap-3 rounded bg-buatbody">
+        <div class="flex w-full py-2 border-b-2 border-black">
+          <p class="w-1/5 font-medium text-center">No</p>
+          <p class="w-1/5 font-medium text-center">email</p>
+          <p class="w-1/5 font-medium text-center">Tanggal Pembayaran</p>
+          <p class="w-1/5 font-medium text-center">Bukti Pembayaran</p>
+          <p class="w-1/5 font-medium text-center">Aksi</p>
+        </div>
+        <div class="flex w-full hover:bg-buatbgkomponen">
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">1</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">andi@gmailom</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ date("Y-m-d", time()) }}</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><img class="gambar-hover rounded bg-white transform duration-200 hover:scale-200" src="{{ url('/icon/community.png') }}"></div>
+          <div class="flex gap-3 w-1/5 p-2 justify-center items-center">
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-green-500 hover:bg-green-700 rounded">Accept</button>
+              </form>
+            </div>
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-red-500 hover:bg-red-700 rounded">Denied</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full hover:bg-buatbgkomponen">
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">1</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">andi@gmailom</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ date("Y-m-d", time()) }}</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><img class="gambar-hover rounded bg-white transform duration-200 hover:scale-200" src="{{ url('/icon/community.png') }}"></div>
+          <div class="flex gap-3 w-1/5 p-2 justify-center items-center">
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-green-500 hover:bg-green-700 rounded">Accept</button>
+              </form>
+            </div>
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-red-500 hover:bg-red-700 rounded">Denied</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full hover:bg-buatbgkomponen">
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">1</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">andi@gmailom</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ date("Y-m-d", time()) }}</p></div>
+          <div class="w-1/5 p-2 flex justify-center items-center"><img class="gambar-hover rounded bg-white transform duration-200 hover:scale-200" src="{{ url('/icon/community.png') }}"></div>
+          <div class="flex gap-3 w-1/5 p-2 justify-center items-center">
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-green-500 hover:bg-green-700 rounded">Accept</button>
+              </form>
+            </div>
+            <div class="">
+              <form action="#" method="post">
+                @csrf
+                <button type="submit" class="p-2 shadow-md bg-red-500 hover:bg-red-700 rounded">Denied</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection

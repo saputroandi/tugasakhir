@@ -1,0 +1,8 @@
+.gambar-hover {
+    z-index: 0 !important;
+}
+
+.gambar-hover:hover {
+    z-index: 100 !important;
+    background-color: blueviolet;
+}

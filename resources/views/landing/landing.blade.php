@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="grid place-items-center mt-20">
+<div class="flex justify-center items-center flex-grow mt-20">
   <p class="text-6xl text-center">
     Landing Page
   </p>

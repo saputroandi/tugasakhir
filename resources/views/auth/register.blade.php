@@ -23,7 +23,7 @@
           <div class="grid place-content-center">
             <div class="mx-10 mt-3 mb-1">
               <label for="nama">Nama</label>
-              <input type="text" name="nama" id="nama" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded focus:outline-none" placeholder="Nama" value={{ old("nama") }}>
+              <input autofocus type="text" name="nama" id="nama" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded focus:outline-none" placeholder="Nama" value={{ old("nama") }}>
               <span class="text-xs text-red-600">@error('nama') {{ $message }} @enderror</span>
             </div>
             <div class="mx-10 mb-1">

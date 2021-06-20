@@ -1,5 +1,5 @@
 {{-- navbar --}}
-<div class="sticky top-0 max-w-full grid grid-cols-6 p-5 gap-y-3 place-items-center shadow-md bg-buatbgkomponen">
+<div class="top-0 max-w-full grid grid-cols-6 p-5 gap-y-3 place-items-center shadow-md bg-buatbgkomponen">
   <div class="grid col-start-1 col-end-4 lg:col-end-3">
     <a href="{{ route("landing") }}" class="p-2 font-semibold text-xl lg:text-3xl">Buat-Surat.online</a>
   </div>
