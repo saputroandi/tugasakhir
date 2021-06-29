@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Web\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,13 +39,9 @@ Route::group([
 Route::get('/email-confirmation/{user}',[AuthController::class, "MailConfirmation"]);
 
 Route::middleware(['auth'])->group(function () {
+    
     // logout 
     Route::post("/auth/logout", [AuthController::class, "Logout"])->name("auth.logout");
-    
-    // dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    })->name("user.dashboard");
     
     // payment
     Route::group([
@@ -57,4 +53,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/confirmation',[PaymentController::class, "PaymentConfirmation"])->name("confirmation");
         Route::post('/confirmation-save/{user:user_id}/{payment:payment_id}', [PaymentController::class, "SavePaymentConfirmation"])->name("confirmation.save");
     });
+
+    // admin 
+    Route::group([
+        "prefix" => "admin",
+        "as" => "admin.",
+        "middleware" => "admin",
+    ], function(){
+        Route::get('/', [AdminController::class, "Index"])->name("index");
+    });
+
+    // users
+    Route::group([
+        "prefix" => "dashboard",
+        "as" => "dashboard."
+    ], function(){
+        Route::get('/', [UserController::class, "Index"])->name("index");
+    });
+
 });

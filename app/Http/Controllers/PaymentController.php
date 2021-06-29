@@ -68,9 +68,11 @@ class PaymentController extends Controller
         ]);
 
         $uploadedFile = $request->file("proof_of_payment");
+        
         $filenameWithExt = $request->file("proof_of_payment")->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         $extension = $request->file("proof_of_payment")->getClientOriginalExtension();
+
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         $saved_filename = Str::remove(' ', $filename)."_".time().".".$extension;
         $path = Storage::putFileAs(
             'public/proof_of_payment', $uploadedFile, $saved_filename
@@ -83,6 +85,17 @@ class PaymentController extends Controller
         $payment->save();
 
         // dd(Storage::url($path));
-        return redirect('/dashboard')->with('success', 'Tunggu maksimal 1x 24 jam untuk proses verifikasi pembayaran oleh admin, status pembayaran akan dikirim melalui email...');
+        return redirect('/dashboard')->with('success', 'Tunggu maksimal 1 x 24 jam untuk proses verifikasi pembayaran oleh admin, status pembayaran akan dikirim melalui email...');
     }
+
+    public function PaymentAccepted(Payment $payment)
+    {
+        dd($payment);
+    }
+
+    public function PaymentDenied(Payment $payment)
+    {
+        dd($payment);
+    }
+    
 }

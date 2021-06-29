@@ -87,7 +87,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($user)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            // return redirect()->intended('dashboard');
+            // dd(Str::substr(Auth::user()->user_id, 0, 1));
+            if(Str::substr(Auth::user()->user_id, 0, 1) == 1){
+                return redirect('/admin');
+            } else {
+                return redirect('/dashboard');
+            }
         }
         return back()->with("fail", "Email atau password salah");
     }
