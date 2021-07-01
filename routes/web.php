@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/save/{user:user_id}', [PaymentController::class, "SavePayment"])->name("save");
         Route::get('/confirmation',[PaymentController::class, "PaymentConfirmation"])->name("confirmation");
         Route::post('/confirmation-save/{user:user_id}/{payment:payment_id}', [PaymentController::class, "SavePaymentConfirmation"])->name("confirmation.save");
+        Route::post('/accept/{user:user_id}/{payment:payment_id}', [PaymentController::class, "PaymentAccepted"])->name("accept");
+        Route::post('/denied/{user:user_id}/{payment:payment_id}', [PaymentController::class, "PaymentDenied"])->name("denied");
     });
 
     // admin 

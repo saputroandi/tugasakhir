@@ -88,14 +88,46 @@ class PaymentController extends Controller
         return redirect('/dashboard')->with('success', 'Tunggu maksimal 1 x 24 jam untuk proses verifikasi pembayaran oleh admin, status pembayaran akan dikirim melalui email...');
     }
 
-    public function PaymentAccepted(Payment $payment)
+    public function PaymentAccepted(User $user, Payment $payment)
     {
-        dd($payment);
+        $payment->payment_status = 3;
+        $payment->save();
+
+        $title = 'Konfirmasi pembayaran anda telah diterima';
+        $note = 'Selamat pembayaran anda telah diterima, anda nikmati fasilitas-fasilitas aplikasi Buat Surat';
+        $note2 = 'Terima kasih semoga bermanfaat';
+
+        $details = [
+            'title' => $title,
+            'note' => $note,
+            'note2' => $note2,
+        ];
+
+        Mail::to($user->email)->send(new VerificationMail($details));
+
+        return redirect('/admin')->with('success', 'Pembayaran di terima');
     }
 
-    public function PaymentDenied(Payment $payment)
+    public function PaymentDenied(User $user, Payment $payment)
     {
-        dd($payment);
+        
+        // Storage::delete('public/proof_of_payment/' . $payment->proof_of_payment);
+        $payment->payment_status = 1;
+        $payment->proof_of_payment = null;
+        $payment->note = null;
+        $payment->save();
+
+        $title = 'Konfirmasi pembayaran anda ditolak';
+        $note = 'Pembayaran anda ditolak, silahkan lakukan konfirmasi pembayaran ulang';
+
+        $details = [
+            'title' => $title,
+            'note' => $note,
+        ];
+
+        Mail::to($user->email)->send(new VerificationMail($details));
+
+        return redirect('/admin')->with('fail', 'Pembayaran di tolak');
     }
     
 }

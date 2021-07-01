@@ -6,7 +6,7 @@
 <body>
     <h3>{{ $title }}</h3>
     <p>{{ $note }}</p>
-    <p>{{ $note2 ? $note2 : "" }}</p>
+    <p>{{ $note2 ?? "" }}</p>
     <p>Thank you</p>
 </body>
 </html>
