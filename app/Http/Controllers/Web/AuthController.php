@@ -56,17 +56,19 @@ class AuthController extends Controller
         $lastUser = User::all()->last();
         $role = "2";
         
-        $user->user_id = $this->CustomHelperController->IdGenerator($lastUser, $role);
+        $user->user_id = $this->CustomHelperController->IdGenerator($lastUser, 'user_id', $role);
+        // dd($user->user_id);
 
         $query = $user->save();
 
         $UserNotConfirmedEmailYet = User::where('email', $request->email)->first();
 
+        $title = 'Konfirmasi email anda dengan meng-klik tautan dibawah ini: ';
         $detailsMailBody = url('/') . '/email-confirmation/' . $UserNotConfirmedEmailYet->user_id ;
 
         $details = [
-        'title' => 'Konfirmasi email anda dengan meng-klik tautan dibawah ini: ',
-        'body' => $detailsMailBody,
+        'title' => $title,
+        'note' => $detailsMailBody,
         ];
 
         Mail::to($request->email)->send(new VerificationMail($details));

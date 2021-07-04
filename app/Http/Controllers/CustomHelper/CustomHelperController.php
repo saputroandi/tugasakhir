@@ -7,24 +7,19 @@ use Illuminate\Support\Str;
 
 class CustomHelperController extends Controller
 {
-    public function IdGenerator($last_record, $role)
+    public function IdGenerator($last_record, $primary_key, $role)
     {
-        $getDate = date("Ymd",time());
+        $firstRecord = "001";
+        $now = date("Ymd",time());
+        $dateFromRecord = Str::substr($last_record[$primary_key], 1, 8);
+        $idFromRecord = intval(Str::substr($last_record[$primary_key], 9, 3));
 
-        if($last_record)
+        if($last_record && $now <= $dateFromRecord && $idFromRecord < 999)
         {
-            if($getDate < Str::substr($last_record->user_id, 1, 8))
-            {
-                $actualId = Str::substr($last_record->user_id, 9, 1) + 1;
-            } else {
-                $actualId = 1;
-            }
-        } else {
-            $actualId = 1;
+            return $id = $last_record[$primary_key] + 1;
         }
 
-        $id = intval($role.$getDate.$actualId);
-
+        $id = intval($role.$now.$firstRecord);
         return $id;
     }
 }

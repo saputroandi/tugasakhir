@@ -38,7 +38,7 @@ class PaymentController extends Controller
         $lastPayment = Payment::all()->last();
         $role = "2";
 
-        $payment->payment_id = $this->CustomHelperController->IdGenerator($lastPayment, $role);
+        $payment->payment_id = $this->CustomHelperController->IdGenerator($lastPayment, 'payment_id', $role);
         
         $payment->save();
 
@@ -111,7 +111,7 @@ class PaymentController extends Controller
     public function PaymentDenied(User $user, Payment $payment)
     {
         
-        // Storage::delete('public/proof_of_payment/' . $payment->proof_of_payment);
+        Storage::delete('public/proof_of_payment/' . $payment->proof_of_payment);
         $payment->payment_status = 1;
         $payment->proof_of_payment = null;
         $payment->note = null;
