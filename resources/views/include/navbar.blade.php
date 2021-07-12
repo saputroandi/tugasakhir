@@ -1,7 +1,7 @@
 {{-- navbar --}}
 <div class="top-0 max-w-full grid grid-cols-6 p-5 gap-y-3 place-items-center shadow-md bg-buatbgkomponen">
   <div class="grid col-start-1 col-end-4 lg:col-end-3">
-    <a href="{{ route("landing") }}" class="p-2 font-semibold text-xl lg:text-3xl">Buat-Surat.online</a>
+    <a href="{{ route("landing") }}" class="p-2 font-semibold text-xl lg:text-3xl">Buat-Surat</a>
   </div>
   @guest
   <div class="hidden lg:grid grid-flow-col gap-3 lg:col-start-5 lg:col-end-7">

@@ -14,9 +14,13 @@
       <span class="text-xs text-center">{{ Session::get("fail") }}</span>
     </div>
     @endif
-    <div class="flex justify-center w-2/3 p-6 rounded-md shadow-lg bg-buatbgkomponen">
+    <div class="flex flex-col justify-center w-2/3 p-6 rounded-md shadow-lg bg-buatbgkomponen">
+      
+      <div class="w-full mb-3">
+        <p class="font-semibold text-2xl text-center">Pembayaran User</p>
+      </div>
+      
       <div class="flex w-full p-1 flex-col items-center gap-3 rounded bg-buatbody">
-
         @if (count($payments) > 0)
         <div class="flex w-full py-2 border-b-2 border-black">
           <p class="w-1/5 font-medium text-center">No</p>

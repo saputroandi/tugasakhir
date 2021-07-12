@@ -13,14 +13,6 @@ use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
-
-    protected $CustomHelperController;
-
-    public function __construct(CustomHelperController $CustomHelperController)
-    {
-        $this->CustomHelperController = $CustomHelperController;
-    }
-
     public function CreatePayment()
     {
         $data = [
@@ -36,9 +28,10 @@ class PaymentController extends Controller
         $payment->user_id = $user->user_id;
 
         $lastPayment = Payment::all()->last();
+        $primaryKey = 'payment_id';
         $role = "2";
 
-        $payment->payment_id = $this->CustomHelperController->IdGenerator($lastPayment, 'payment_id', $role);
+        $payment->payment_id = CustomHelperController::IdGenerator($lastPayment, $primaryKey, $role);
         
         $payment->save();
 

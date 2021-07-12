@@ -15,8 +15,8 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'user_id';
-
     public $incrementing = false;
+    public $timestamps = false;
 
     public function getRouteKeyName()
     {
@@ -26,5 +26,10 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 }

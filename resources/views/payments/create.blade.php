@@ -3,6 +3,11 @@
 @section('content')
 <div class="flex flex-col justify-center items-center h-screen max-w-full">
   <p class="w-11/12 text-center text-xl font-semibold md:text-3xl">Pilih Paket Member</p>
+  <div class="w-11/12 p-2 mt-2 rounded bg-yellow-300">
+    <p class="text-center font-semibold text-red-500">PERHATIAN</p>
+    <p class="text-center font-semibold">Transfer Hanya Ke Rekening BCA a/n Andi Saputro</p>
+    <p class="text-center font-semibold">Dengan No Rekening : 0123456789</p>
+  </div>
   <div class="flex w-11/12 gap-3 mt-8 flex-col md:flex-row">
     <div class="flex justify-center items-center p-5 gap-4 w-full flex-col border-solid border-black border-2">
       <div class="">

@@ -16,24 +16,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert(
-        [
-            'user_id' => '1' . date("Ymd",time()) . '1',
-            'nama' => 'admin',
-            'email' => 'admin@gmail.com',
-            'email_verifikasi' => true,
-            'password' => Hash::make('123123'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ],
         // [
-        //     'user_id' => '2' . date("Ymd",time()) . '1',
-        //     'nama' => 'andi',
-        //     'email' => 'andi@gmail.com',
+        //     'user_id' => '1' . date("Ymd",time()) . '001',
+        //     'nama' => 'admin',
+        //     'email' => 'admin@gmail.com',
         //     'email_verifikasi' => true,
         //     'password' => Hash::make('123123'),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
         // ],
+        [
+            'user_id' => '2' . date("Ymd",time()) . '001',
+            'nama' => 'andi',
+            'email' => 'andi@gmail.com',
+            'email_verifikasi' => true,
+            'password' => Hash::make('123123'),
+        ],
     );
     }
 }

@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // NahidulHasan\Html2pdf\Html2pdfServiceProvider::class,
+
     ],
 
     /*
@@ -227,6 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // 'Pdf'  => NahidulHasan\Html2pdf\Facades\Pdf::class,
 
     ],
 

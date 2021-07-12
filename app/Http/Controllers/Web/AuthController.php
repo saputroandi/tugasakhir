@@ -14,13 +14,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    protected $CustomHelperController;
-
-    public function __construct(CustomHelperController $CustomHelperController)
-    {
-        $this->CustomHelperController = $CustomHelperController;
-    }
-
     public function Login()
     {
         $data = [
@@ -56,7 +49,7 @@ class AuthController extends Controller
         $lastUser = User::all()->last();
         $role = "2";
         
-        $user->user_id = $this->CustomHelperController->IdGenerator($lastUser, 'user_id', $role);
+        $user->user_id = CustomHelperController::IdGenerator($lastUser, 'user_id', $role);
         // dd($user->user_id);
 
         $query = $user->save();
@@ -89,8 +82,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($user)) {
             $request->session()->regenerate();
-            // return redirect()->intended('dashboard');
-            // dd(Str::substr(Auth::user()->user_id, 0, 1));
+            
             if(Str::substr(Auth::user()->user_id, 0, 1) == 1){
                 return redirect('/admin');
             } else {

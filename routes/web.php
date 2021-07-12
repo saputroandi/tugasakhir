@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PrintController;
+use App\Http\Controllers\Surat\ChooseSuratController;
+use App\Http\Controllers\Surat\SKController;
+use App\Http\Controllers\Surat\SPDController;
+use App\Http\Controllers\User\FeedbackController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Web\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
         "middleware" => "admin",
     ], function(){
         Route::get('/', [AdminController::class, "Index"])->name("index");
+        Route::get('/all-document', [AdminController::class, "AllDocument"])->name("all_document");
+        Route::get('/users', [AdminController::class, "Users"])->name("users");
     });
 
     // users
@@ -71,6 +78,50 @@ Route::middleware(['auth'])->group(function () {
         "as" => "dashboard."
     ], function(){
         Route::get('/', [UserController::class, "Index"])->name("index");
+
+    });
+
+    // route pilih surat
+    Route::get('/choose', function(){
+        return view('choose.index');
+    })->name('choose.index');
+
+    // route grup surat pengunduran diri
+    Route::group([
+        "prefix" => "spd",
+        "as" => "spd."
+    ], function(){
+        Route::get('/', [SPDController::class, "Create"])->name('create');
+        Route::get('/{order:order_id}/edit', [SPDController::class, "Edit"])->name('edit');
+        Route::post('/{user:user_id}', [SPDController::class, "Store"])->name('store');
+        Route::patch('/{order:order_id}', [SPDController::class, "Update"])->name('update');
+        Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
+    });
+
+    // route grup surat pengunduran diri
+    Route::group([
+        "prefix" => "sk",
+        "as" => "sk."
+    ], function(){
+        Route::get('/', [SKController::class, "Create"])->name('create');
+        // Route::get('/edit', [SPDController::class, "Edit"])->name('edit');
+        Route::post('/{user:user_id}', [SKController::class, "Store"])->name('store');
+    });
+
+    // route halaman feedback
+    Route::group([
+        "prefix" => "feedback",
+        "as" => "feedback."
+    ], function(){
+        Route::get('/', [FeedbackController::class, "Create"])->name('create');
+    });
+
+    // route halaman print
+    Route::group([
+        "prefix" => "print",
+        "as" => "print."
+    ], function(){
+        Route::get('/{slug}/{order:order_id}', [PrintController::class, "Download"])->name('download');
     });
 
 });

@@ -15,4 +15,14 @@ class AdminController extends Controller
         
         return view('admin.dashboard', compact('payments'));
     }
+
+    public function AllDocument()
+    {
+        return view('admin.all_document');
+    }
+
+    public function Users()
+    {
+        return view('admin.users');
+    }
 }
