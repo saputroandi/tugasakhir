@@ -40,7 +40,7 @@
           {{-- end of header --}}
           @foreach ($orders as $key => $order)
           @php
-              $namaDomainSurat = explode('_',$order->nama_order)[0];
+              $slugSurat = explode('_',$order->nama_order)[0];
               $namaOrder = explode('_',$order->nama_order)[1];
           @endphp
           {{-- data --}}
@@ -53,12 +53,12 @@
               <p class="font-light text-sm">{{ $namaSurat[$key] }}</p>
             </div>
             <div class="flex justify-center items-center p-2 w-1/3 gap-3">
-              <a href="{{ '/'.$namaDomainSurat.'/'.$order->order_id.'/edit' }}" class="p-3 rounded bg-green-500">Edit</a>
-              <a href="{{ route('print.download',['slug' => $namaDomainSurat, 'order' => $order->order_id]) }}" class="p-3 rounded bg-blue-500">Download</a>
-              <form action="{{ '/'.$namaDomainSurat.'/'.$order->order_id }}" method="post">
+              <a href="{{ '/'.$slugSurat.'/'.$order->order_id.'/edit' }}" class="p-3 rounded bg-green-500">Edit</a>
+              <a href="{{ route('print.download',['slug' => $slugSurat, 'order' => $order->order_id]) }}" class="p-3 rounded bg-blue-500" target="_blank">Download</a>
+              <form action="{{ '/'.$slugSurat.'/'.$order->order_id }}" method="post">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="p-3 rounded bg-red-500">Delete</button>
+                <button type="submit" class="p-3 rounded bg-red-500" onclick="return confirm('Anda yakin ingin menghapus surat ini ?')">Delete</button>
               </form>
             </div>
           </div>

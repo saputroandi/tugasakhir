@@ -24,7 +24,6 @@ class SPDController extends Controller
     public function Edit(Order $order)
     {
         $order->load('spds');
-        // $spd = SPD::where('order_id', $order->order_id)->first();
         return view('spd.edit', compact(['order']));
     }
 

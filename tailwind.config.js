@@ -1,16 +1,21 @@
 module.exports = {
-    purge: [],
-    darkMode: false, // or 'media' or 'class'
-    theme: {
+    purge   : [],
+    darkMode: false,   // or 'media' or 'class'
+    theme   : {
         extend: {
             colors: {
-                buatborder: "#393e46",
-                buatbutton: "#00adb5",
+                buatborder    : "#393e46",
+                buatbutton    : "#00adb5",
                 buatbgkomponen: "#aad8d3",
-                buatbody: "#eeeeee",
+                buatbody      : "#eeeeee",
             },
             spacing: {
-                '2.5': '2.5cm',
+                '0.63cm': '0.63cm',
+                '1.27cm': '1.27cm',
+                '2.54cm': '2.54cm',
+                '3cm': '3cm',
+                '21cm'  : '21cm',
+                '29.7cm': '29.7cm',
             }
         },
         scale: {

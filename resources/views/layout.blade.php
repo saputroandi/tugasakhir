@@ -22,5 +22,6 @@
     </div>
 
     @include('include.script')
+    @stack('after-script')
 </body>
 </html>

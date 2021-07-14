@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $namaSurat = explode('_',$order->nama_order)[0];
+    $slugSurat = explode('_',$order->nama_order)[0];
     $namaOrder = explode('_',$order->nama_order)[1];
     $spd = $order->spds[0];
 @endphp
@@ -11,7 +11,7 @@
 <div class="flex w-full justify-center items-center">
   <div class="flex flex-col p-4 my-5 w-10/12 bg-buatbgkomponen gap-2 rounded-md">
     <p class="text-center font-medium text-3xl">Edit Surat Pengunduran Diri</p>
-    <form action="{{ '/'.$namaSurat.'/'.$order->order_id }}" method="post">
+    <form action="{{ '/'.$slugSurat.'/'.$order->order_id }}" method="post">
       @method('PATCH')
       @csrf
         <div class="mx-8 mt-3 mb-1 opacity-60">
@@ -52,8 +52,7 @@
         <div class="flex gap-2 mx-8 mb-2">
           <div class="w-1/2">
             <label for="tmpt_spd_terbit">Dimana Surat Ini Di Terbitkan</label>
-            <input type="text" name="tmpt_spd_terbit" id="tmpt_spd_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
-            value="{{ $spd->tmpt_spd_terbit }}">
+            <input type="text" name="tmpt_spd_terbit" id="tmpt_spd_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $spd->tmpt_spd_terbit }}">
             <span class="text-xs text-red-600">@error('tmpt_spd_terbit') {{ $message }} @enderror</span>
           </div>
           <div class="w-1/2">

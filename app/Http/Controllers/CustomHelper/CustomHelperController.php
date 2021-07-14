@@ -26,4 +26,23 @@ class CustomHelperController extends Controller
         $id = intval($role.$now.$firstRecord);
         return $id;
     }
+
+    public static function tanggalIndo($tanggal)
+    {
+        $bulan = array (1 =>   'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember'
+                );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+    }
 }

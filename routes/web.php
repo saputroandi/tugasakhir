@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('landing.landing');
+    // return view('landing.landing');
+    return redirect('/auth/login');
 })->name("landing");
 
 
@@ -98,14 +99,16 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
     });
 
-    // route grup surat pengunduran diri
+    // route grup surat kuasa
     Route::group([
         "prefix" => "sk",
         "as" => "sk."
     ], function(){
         Route::get('/', [SKController::class, "Create"])->name('create');
-        // Route::get('/edit', [SPDController::class, "Edit"])->name('edit');
+        Route::get('/{order:order_id}/edit', [SKController::class, "Edit"])->name('edit');
         Route::post('/{user:user_id}', [SKController::class, "Store"])->name('store');
+        Route::patch('/{order:order_id}', [SKController::class, "Update"])->name('update');
+        Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
     });
 
     // route halaman feedback
