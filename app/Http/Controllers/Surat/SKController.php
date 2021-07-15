@@ -81,7 +81,7 @@ class SKController extends Controller
 
         $spd['sk_id']   = CustomHelperController::IdGenerator($spdLastRecord, $spdPrimaryKey, $role);
         $spd['order_id'] = $order['order_id'];
-        SK:: create($spd);
+        SK::create($spd);
 
         return redirect('/dashboard')->with('success', 'surat berhasil dibuat');
     }

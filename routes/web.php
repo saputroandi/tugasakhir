@@ -6,6 +6,7 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\Surat\ChooseSuratController;
 use App\Http\Controllers\Surat\SKController;
 use App\Http\Controllers\Surat\SPDController;
+use App\Http\Controllers\Surat\SPMController;
 use App\Http\Controllers\User\FeedbackController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Web\AuthController;
@@ -108,7 +109,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{order:order_id}/edit', [SKController::class, "Edit"])->name('edit');
         Route::post('/{user:user_id}', [SKController::class, "Store"])->name('store');
         Route::patch('/{order:order_id}', [SKController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
+        Route::delete('/{order:order_id}', [SKController::class, "Delete"])->name('delete');
+    });
+
+    // route grup surat kuasa
+    Route::group([
+        "prefix" => "spm",
+        "as" => "spm."
+    ], function(){
+        Route::get('/', [SPMController::class, "Create"])->name('create');
+        Route::get('/{order:order_id}/edit', [SPMController::class, "Edit"])->name('edit');
+        Route::post('/{user:user_id}', [SPMController::class, "Store"])->name('store');
+        Route::patch('/{order:order_id}', [SPMController::class, "Update"])->name('update');
+        Route::delete('/{order:order_id}', [SPMController::class, "Delete"])->name('delete');
     });
 
     // route halaman feedback

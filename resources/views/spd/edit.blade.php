@@ -16,7 +16,7 @@
       @csrf
         <div class="mx-8 mt-3 mb-1 opacity-60">
           <label for="nama_order">Nama Surat</label>
-          <input type="text" name="nama_order" id="nama_order" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value={{$namaOrder}} disabled>
+          <input type="text" name="nama_order" id="nama_order" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{$namaOrder}}" disabled>
           <span class="text-xs text-red-600">@error('nama_order') {{ $message }} @enderror</span>
         </div>
         <div class="mx-8 mb-1">

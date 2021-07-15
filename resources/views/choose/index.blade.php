@@ -20,7 +20,7 @@
           </a>
         </div>
         <div class="flex justify-center w-full rounded bg-blue-500 hover:bg-blue-600">
-          <a href="#" class="w-full py-2">
+          <a href="{{ route('spm.create') }}" class="w-full py-2">
             <p class="text-center">Surat Permohonan Maaf</p>
           </a>
         </div>

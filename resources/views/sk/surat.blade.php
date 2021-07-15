@@ -3,9 +3,11 @@
 @section('content-surat')
 {{-- {{dd($namaOrder, $tanggalLahirSk, $tanggalLahirPenerimaSK, $tanggalSKTerbit)}} --}}
 <div class="flex flex-col w-full my-10 justify-center items-center">
+  
   <div class="my-3">
     <p class="namaOrder">{{ ucfirst($namaOrder) }}</p>
   </div>
+
   <div class="my-3">
     <a href="#" class="p-3 rounded bg-blue-500 button-print">Download</a>
   </div>

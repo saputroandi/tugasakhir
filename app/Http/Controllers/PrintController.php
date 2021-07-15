@@ -32,6 +32,17 @@ class PrintController extends Controller
                 return view('sk.surat', compact(['order', 'sk', 'namaOrder', 'tanggalLahirSK', 'tanggalLahirPenerimaSK', 'tanggalSKTerbit']));
 
                 break;
+
+            case 'spm': 
+
+                $order->load('spms');
+                $spm              = $order->spms[0];
+                $namaOrder        = explode('_',$order->nama_order)[1];
+                $tanggalSPMTerbit = CustomHelperController::tanggalIndo(date('Y-n-d', strtotime($spm->tgl_spm_terbit)));
+
+                return view('spm.surat', compact(['order', 'spm', 'namaOrder', 'tanggalSPMTerbit']));
+
+                break;
             
             default: 
                 $suratNotFound = 'surat tidak ditemukan';
