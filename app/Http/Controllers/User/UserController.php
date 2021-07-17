@@ -31,6 +31,10 @@ class UserController extends Controller
                 case 'spm':
                     $namaSurat->push('Surat Permohonan Maaf');
                     break;
+
+                case 'sitmk':
+                    $namaSurat->push('Surat Izin Tidak Masuk Kerja');
+                    break;
                 
                 default:
                     return abort(404);

@@ -49,7 +49,7 @@ class SPMController extends Controller
         $order['order_id']   = CustomHelperController::IdGenerator($lastRecord, $primaryKey, $role);
         $order['nama_order'] = $this->orderName.$request->nama_order;
         $order['user_id']    = $user->user_id;
-        Order:: create($order);
+        Order::create($order);
 
         $spm = $request->only([
             "nama_spm",

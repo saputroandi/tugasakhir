@@ -43,6 +43,19 @@ class PrintController extends Controller
                 return view('spm.surat', compact(['order', 'spm', 'namaOrder', 'tanggalSPMTerbit']));
 
                 break;
+
+            case 'sitmk': 
+
+                $order->load('sitmks');
+                $sitmk              = $order->sitmks[0];
+                $namaOrder          = explode('_',$order->nama_order)[1];
+                $tanggalMulaiSITMK  = CustomHelperController::tanggalIndo(date('Y-n-d', strtotime($sitmk->mulai_sitmk)));
+                $tanggalAkhirSITMK  = CustomHelperController::tanggalIndo(date('Y-n-d', strtotime($sitmk->sampai_sitmk)));
+                $tanggalSITMKTerbit = CustomHelperController::tanggalIndo(date('Y-n-d', strtotime($sitmk->tgl_sitmk_terbit)));
+
+                return view('sitmk.surat', compact(['order', 'sitmk', 'namaOrder', 'tanggalMulaiSITMK', 'tanggalAkhirSITMK', 'tanggalSITMKTerbit']));
+
+                break;
             
             default: 
                 $suratNotFound = 'surat tidak ditemukan';
