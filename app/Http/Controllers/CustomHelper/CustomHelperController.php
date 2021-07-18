@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CustomHelper;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class CustomHelperController extends Controller
 {
@@ -44,5 +45,19 @@ class CustomHelperController extends Controller
                 );
         $split = explode('-', $tanggal);
         return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+    }
+
+    public static function ManualValidation($dataToValidate, $arrayMessages)
+    {
+        foreach ($dataToValidate as $key => $value) {
+
+            $lampirans = count($dataToValidate) - 1;
+
+            if($dataToValidate[$key]) break;
+            if($key == $lampirans) throw ValidationException::withMessages($arrayMessages);
+
+            continue;
+
+        }
     }
 }

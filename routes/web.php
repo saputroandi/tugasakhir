@@ -5,6 +5,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\Surat\SITMKController;
 use App\Http\Controllers\Surat\SKController;
+use App\Http\Controllers\Surat\SLPController;
 use App\Http\Controllers\Surat\SPDController;
 use App\Http\Controllers\Surat\SPMController;
 use App\Http\Controllers\User\FeedbackController;
@@ -134,6 +135,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{user:user_id}', [SITMKController::class, "Store"])->name('store');
         Route::patch('/{order:order_id}', [SITMKController::class, "Update"])->name('update');
         Route::delete('/{order:order_id}', [SITMKController::class, "Delete"])->name('delete');
+    });
+
+    // route grup surat izin tidak masuk kerja
+    Route::group([
+        "prefix" => "slp",
+        "as" => "slp."
+    ], function(){
+        Route::get('/', [SLPController::class, "Create"])->name('create');
+        Route::get('/{order:order_id}/edit', [SLPController::class, "Edit"])->name('edit');
+        Route::post('/{user:user_id}', [SLPController::class, "Store"])->name('store');
+        Route::patch('/{order:order_id}', [SLPController::class, "Update"])->name('update');
+        Route::delete('/{order:order_id}', [SLPController::class, "Delete"])->name('delete');
     });
 
     // route halaman feedback
