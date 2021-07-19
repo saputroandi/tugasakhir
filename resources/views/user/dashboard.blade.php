@@ -19,11 +19,13 @@
         <div class="">
           <p class="text-3xl font-medium">List Surat Anda</p>
         </div>
+        @can('active_member')
         <div class="flex justify-center w-full rounded bg-blue-500 hover:bg-blue-600">
           <a href="{{ route('choose.index') }}" class="w-full py-2">
             <p class="text-center">Buat Surat Baru</p>
           </a>
         </div>
+        @endcan
         <div class="flex flex-col w-full p-4 bg-buatbody rounded gap-3">
           {{-- header --}}
           <div class="flex w-full py-2 bg-gray-400 rounded">

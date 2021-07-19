@@ -16,6 +16,7 @@ class Payment extends Model
 
     protected $primaryKey = 'payment_id';
     public $incrementing = false;
+    public $timestamps = false;
 
     public function getRouteKeyName()
     {

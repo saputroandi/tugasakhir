@@ -85,8 +85,8 @@ class SLPController extends Controller
         $slp['order_id'] = $order['order_id'];
         SLP::create($slp);
 
-        foreach ($request->lampiran as $index => $value) {
-
+        foreach ($request->lampiran as $index => $value)
+        {
             $lampiranLastRecord = Lampiran::all()->last();
             $lampiranPrimaryKey = 'lampiran_id';
             $lampiranId         = CustomHelperController::IdGenerator($lampiranLastRecord, $lampiranPrimaryKey, $role);
@@ -137,8 +137,8 @@ class SLPController extends Controller
                 $v->delete();
             }
 
-            foreach ($request->lampiran as $index => $value) {
-    
+            foreach ($request->lampiran as $index => $value)
+            {
                 $lampiranLastRecord = Lampiran::all()->last();
                 $lampiranPrimaryKey = 'lampiran_id';
                 $role               = '2';

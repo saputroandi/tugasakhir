@@ -83,7 +83,7 @@
         <div class="flex flex-col items-center w-1/2">
           <p class="">{{ucfirst($spm->tmpt_spm_terbit).', '.$tanggalSPMTerbit}}</p>
           <p class="mb-16">Hormat Saya</p>
-          <p class=" font-semibold underline">({{ucfirst($spm->nama_spm)}})</p>
+          <p class=" font-semibold underline text-center">({{ucfirst($spm->nama_spm)}})</p>
         </div>
       </div>
 

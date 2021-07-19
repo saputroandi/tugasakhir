@@ -75,7 +75,7 @@
         <div class="flex flex-col items-center w-1/2">
           <p class="">{{ucfirst($sitmk->tmpt_sitmk_terbit).', '.$tanggalSITMKTerbit}}</p>
           <p class="mb-16">Hormat Saya</p>
-          <p class=" font-semibold underline">({{ucfirst($sitmk->nama_sitmk)}})</p>
+          <p class=" font-semibold underline text-center">({{ucfirst($sitmk->nama_sitmk)}})</p>
         </div>
       </div>
 

@@ -108,7 +108,7 @@
           <p>{{$sk->tmpt_sk_terbit.', '.$tanggalSKTerbit}}</p>
           <p class="mb-5">Pihak Pertama</p>
           <p class="mb-5 p-1 border-2 border-black">materai</p>
-          <p class=" font-semibold underline">({{ucfirst($sk->nama_sk)}})</p>
+          <p class=" font-semibold underline text-center">({{ucfirst($sk->nama_sk)}})</p>
         </div>
       </div>
 

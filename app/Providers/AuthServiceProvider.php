@@ -28,23 +28,28 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define("is_admin", function (User $user) {
-            return Str::substr($user->user_id, 0, 1) == 1;
+            if(Str::substr($user->user_id, 0, 1) == 1) return true;
         });
         
         Gate::define("is_user", function (User $user) {
-            return Str::substr($user->user_id, 0, 1) == 2;
+            if(Str::substr($user->user_id, 0, 1) == 2) return true;
         });
 
         Gate::define("have_choose_member", function (User $user) {
-            return count($user->payments) > 0;
+            if(count($user->payments) > 0) return true;
         });
 
         Gate::define("have_not_choose_member", function (User $user) {
-            return count($user->payments) == 0;
+            if(count($user->payments) == 0) return true;
         });
 
         Gate::define("not_confirm_payment_yet", function (User $user) {
-            return $user->payments->first()->payment_status == 1;
+            if($user->payments->first()->payment_status == 1) return true;
+        });
+
+        Gate::define("active_member", function (User $user) {
+            if(count($user->payments) == 0) return false;
+            if($user->payments->last()->payment_status == 3) return true;
         });
 
 

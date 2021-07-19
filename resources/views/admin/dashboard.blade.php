@@ -30,10 +30,16 @@
           <p class="w-1/5 font-medium text-center">Aksi</p>
         </div>
         @foreach ($payments as $payment)
+        @php
+            $tahun   = Str::substr($payment->payment_id, 1, 4);
+            $bulan   = Str::substr($payment->payment_id, 5, 2);
+            $tanggal = Str::substr($payment->payment_id, 7, 2);
+
+        @endphp
           <div class="flex w-full hover:bg-buatbgkomponen">
             <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $loop->iteration }}</p></div>
             <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $payment->user->email }}</p></div>
-            <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $payment->created_at->format('d/m/Y') }}</p></div>
+            <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $tanggal.'/'.$bulan.'/'.$tahun }}</p></div>
             <div class="w-1/5 p-2 flex justify-center items-center"><img class="gambar-hover rounded bg-white transform duration-200 hover:scale-200" src="{{ url('storage/proof_of_payment/'.$payment->proof_of_payment) }}"></div>
             <div class="flex gap-3 w-1/5 p-2 justify-center items-center">
               <div class="">

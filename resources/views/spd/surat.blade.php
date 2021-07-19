@@ -55,7 +55,7 @@
             <p class="text-center">Hormat Saya</p>
           </div>
           <div class="w-full">
-            <p class="font-semibold text-sm">( {{ucfirst(trans($spd->nama_spd))}} )</p>
+            <p class="font-semibold text-sm text-center">( {{ucfirst(trans($spd->nama_spd))}} )</p>
           </div>
         </div>
       </div>
