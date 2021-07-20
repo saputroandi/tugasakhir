@@ -35,21 +35,19 @@ class AuthServiceProvider extends ServiceProvider
             if(Str::substr($user->user_id, 0, 1) == 2) return true;
         });
 
-        Gate::define("have_choose_member", function (User $user) {
-            if(count($user->payments) > 0) return true;
-        });
-
         Gate::define("have_not_choose_member", function (User $user) {
-            if(count($user->payments) == 0) return true;
+            // user belum memilih membership atau membership sudah tidak valid (sudah melewati durasi membership)
+            if(count($user->payments) == 0 || $user->payments->last()->payment_status == 4) return true;
         });
 
         Gate::define("not_confirm_payment_yet", function (User $user) {
-            if($user->payments->first()->payment_status == 1) return true;
+            // user sudah memilih membership tapi dan belum melakukan konfirmasi
+            if(count($user->payments) > 0 && $user->payments->last()->payment_status == 1) return true;
         });
 
         Gate::define("active_member", function (User $user) {
-            if(count($user->payments) == 0) return false;
-            if($user->payments->last()->payment_status == 3) return true;
+            // user sudah memiliki membership dan membership masih valid
+            if(count($user->payments) > 0 && $user->payments->last()->payment_status == 3) return true;
         });
 
 

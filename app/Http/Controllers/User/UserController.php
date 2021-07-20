@@ -47,5 +47,10 @@ class UserController extends Controller
         }
 
         return view('user.dashboard', compact(['orders', 'namaSurat']));
+        // $now              = date("Ymd",time());
+        // $userPaymentYear  = Str::substr(Auth::user()->payments->last()->payment_id, 1, 4);
+        // $userPaymentMonth = Str::substr(Auth::user()->payments->last()->payment_id, 5, 2);
+        // $userPaymentDay   = Str::substr(Auth::user()->payments->last()->payment_id, 7, 2);
+        // dd(Auth::user());
     }
 }

@@ -12,13 +12,11 @@
   @auth
   <div class="hidden lg:grid grid-flow-col gap-3 lg:col-start-5 lg:col-end-7">
     @can('is_user')
-      @can ('have_choose_member')    
-        @can ('not_confirm_payment_yet')
-          <a href="{{ route('payment.confirmation') }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Konfirmasi Pembayaran</a>
-        @endcan
-      @endcan
       @can ('have_not_choose_member')
         <a href="{{ route("payment.create") }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Daftar Member</a>
+      @endcan   
+      @can ('not_confirm_payment_yet')
+        <a href="{{ route('payment.confirmation') }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Konfirmasi Pembayaran</a>
       @endcan
     @endcan
     <form action="{{ route("auth.logout") }}" method="post">
@@ -44,13 +42,11 @@
     @endguest
     @auth
     @can('is_user')
-      @can ('have_choose_member')
-        @can ('not_confirm_payment_yet')
-          <a href="{{ route('payment.confirmation') }}" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Konfirmasi Pembayaran</a>
-        @endcan
-      @endcan
       @can('have_not_choose_member')
         <a href="{{ route("payment.create") }}" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Daftar Member</a>
+      @endcan
+      @can ('not_confirm_payment_yet')
+        <a href="{{ route('payment.confirmation') }}" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Konfirmasi Pembayaran</a>
       @endcan
     @endcan
     <form action="{{ route("auth.logout") }}" method="post">

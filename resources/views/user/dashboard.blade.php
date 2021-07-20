@@ -55,7 +55,9 @@
               <p class="font-light text-sm">{{ $namaSurat[$key] }}</p>
             </div>
             <div class="flex justify-center items-center p-2 w-1/3 gap-3">
+              @can('active_member')
               <a href="{{ '/'.$slugSurat.'/'.$order->order_id.'/edit' }}" class="p-3 rounded bg-green-500">Edit</a>
+              @endcan
               <a href="{{ route('print.download',['slug' => $slugSurat, 'order' => $order->order_id]) }}" class="p-3 rounded bg-blue-500" target="_blank">Download</a>
               <form action="{{ '/'.$slugSurat.'/'.$order->order_id }}" method="post">
                 @method('DELETE')
