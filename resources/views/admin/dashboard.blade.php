@@ -23,11 +23,11 @@
       <div class="flex w-full p-1 flex-col items-center gap-3 rounded bg-buatbody">
         @if (count($payments) > 0)
         <div class="flex w-full py-2 border-b-2 border-black">
-          <p class="w-1/5 font-medium text-center">No</p>
-          <p class="w-1/5 font-medium text-center">email</p>
-          <p class="w-1/5 font-medium text-center">Tanggal Pembayaran</p>
-          <p class="w-1/5 font-medium text-center">Bukti Pembayaran</p>
-          <p class="w-1/5 font-medium text-center">Aksi</p>
+          <p class="w-1/6 font-medium text-center">No</p>
+          <p class="w-1/6 font-medium text-center">email</p>
+          <p class="w-1/6 font-medium text-center">Tanggal Pembayaran</p>
+          <p class="w-2/6 font-medium text-center">Bukti Pembayaran</p>
+          <p class="w-1/6 font-medium text-center">Aksi</p>
         </div>
         @foreach ($payments as $payment)
         @php
@@ -37,11 +37,11 @@
 
         @endphp
           <div class="flex w-full hover:bg-buatbgkomponen">
-            <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $loop->iteration }}</p></div>
-            <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $payment->user->email }}</p></div>
-            <div class="w-1/5 p-2 flex justify-center items-center"><p class="text-center">{{ $tanggal.'/'.$bulan.'/'.$tahun }}</p></div>
-            <div class="w-1/5 p-2 flex justify-center items-center"><img class="gambar-hover rounded bg-white transform duration-200 hover:scale-200" src="{{ url('storage/proof_of_payment/'.$payment->proof_of_payment) }}"></div>
-            <div class="flex gap-3 w-1/5 p-2 justify-center items-center">
+            <div class="w-1/6 p-2 flex justify-center items-center"><p class="text-center">{{ $loop->iteration }}</p></div>
+            <div class="w-1/6 p-2 flex justify-center items-center"><p class="text-center">{{ $payment->user->email }}</p></div>
+            <div class="w-1/6 p-2 flex justify-center items-center"><p class="text-center">{{ $tanggal.'/'.$bulan.'/'.$tahun }}</p></div>
+            <div class="w-2/6 flex justify-center items-center"><div class="gambar-hover bg-white transform duration-200 hover:scale-200" style="width: 250px;height: 150px;background-image: url({{ url('storage/proof_of_payment/'.$payment->proof_of_payment) }});background-size: cover;background-repeat: no-repeat;background-position: center;"></div></div>
+            <div class="flex flex-col gap-3 w-1/6 p-2 justify-center items-center">
               <div class="">
                 <form action="{{ route('payment.accept', ["user" => $payment->user->user_id,'payment'=>$payment->payment_id]) }}" method="post">
                   @csrf

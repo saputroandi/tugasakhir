@@ -137,7 +137,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{order:order_id}', [SITMKController::class, "Delete"])->name('delete');
     });
 
-    // route grup surat izin tidak masuk kerja
+    // route grup surat lamaran pekerjaan
     Route::group([
         "prefix" => "slp",
         "as" => "slp."
@@ -155,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
         "as" => "feedback."
     ], function(){
         Route::get('/', [FeedbackController::class, "Create"])->name('create');
+        Route::post('/{user:user_id}', [FeedbackController::class, "Send"])->name('send');
     });
 
     // route halaman print

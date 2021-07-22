@@ -8,7 +8,7 @@
     <div class="flex flex-col justify-center py-2 mx-8 border-solid border-1 border-black bg-yellow-200 rounded-md">
       <p class="font-medium text-center">Feedback anda akan di kirim ke email admin</p>
     </div>
-    <form action="#"  method="post">
+    <form action="{{ route('feedback.send', Auth::user()->user_id) }}"  method="post">
       @csrf
         <div class="mx-8 mt-3 mb-1 opacity-60">
           <label for="email">Email User</label>

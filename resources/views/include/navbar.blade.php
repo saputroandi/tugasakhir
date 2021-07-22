@@ -19,6 +19,7 @@
         <a href="{{ route('payment.confirmation') }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Konfirmasi Pembayaran</a>
       @endcan
     @endcan
+    <a href="{{ route('feedback.create') }}" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Feedback</a>
     <form action="{{ route("auth.logout") }}" method="post">
       @csrf
     <button type="submit" class="p-2 rounded font-medium bg-buatbutton hover:bg-gray-600 hover:text-white">Logout</button>
