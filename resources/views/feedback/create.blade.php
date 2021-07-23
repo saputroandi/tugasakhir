@@ -15,8 +15,8 @@
           <input type="text" name="email" id="email" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " placeholder="Email" value="{{ Auth::user()->email }}" disabled>
         </div>
         <div class="mx-8 mt-3 mb-1">
-          <label for="email">Subject</label>
-          <input type="text" name="email" id="email" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " placeholder="Subject">
+          <label for="title">Subject</label>
+          <input type="text" name="title" id="title" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " placeholder="Title">
         </div>
         <div class="mx-8 mt-3 mb-2">
           <label for="note">Catatan</label>
