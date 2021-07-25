@@ -19,9 +19,8 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(Str::substr(Auth::user()->user_id, 0, 1) != 1){
-            return back()->with('fail', 'Unauthorized user');
-        }
+        $role = Str::substr(Auth::user()->user_id, 0, 1);
+        if($role != 1) return back()->with('fail', 'Unauthorized user');
 
         return $next($request);
     }

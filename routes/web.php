@@ -78,10 +78,10 @@ Route::middleware(['auth'])->group(function () {
     // users
     Route::group([
         "prefix" => "dashboard",
-        "as" => "dashboard."
+        "as" => "dashboard.",
+        "middleware" => "payment",
     ], function(){
         Route::get('/', [UserController::class, "Index"])->name("index");
-        // return dd('jancuk');
     });
 
     // route pilih surat
