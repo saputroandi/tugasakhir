@@ -27,16 +27,15 @@ class PaymentMiddleware
             $getPaymentDateAsEpoch = strtotime(Str::substr($lastPayment->payment_id, 1, 8));
             $monthAfterPaymentDate = strtotime('+1 month', $getPaymentDateAsEpoch);
 
+            if($lastPayment->payment_status == $validMemberStatus && $monthAfterPaymentDate < time()){
+    
+                $lastPayment->payment_status = $invalidMemberStatus;
+                $lastPayment->save();
+                return redirect('/dashboard')->with('fail', 'Membership anda sudah tidak valid, harap memperbarui membership anda..');
+    
+            };
+
         }
-
-
-        if($lastPayment && $lastPayment->payment_status == $validMemberStatus && $monthAfterPaymentDate < time()){
-
-            $lastPayment->payment_status = $invalidMemberStatus;
-            $lastPayment->save();
-            return redirect('/dashboard')->with('fail', 'Membership anda sudah tidak valid, harap memperbarui membership anda..');
-
-        };
 
         return $next($request);
     }

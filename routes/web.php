@@ -84,70 +84,78 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [UserController::class, "Index"])->name("index");
     });
 
-    // route pilih surat
-    Route::get('/choose', function(){
-        return view('choose.index');
-    })->name('choose.index');
-
-    // route grup surat pengunduran diri
+    // member middleware
     Route::group([
-        "prefix" => "spd",
-        "as" => "spd."
+        "middleware" => "member",
     ], function(){
-        Route::get('/', [SPDController::class, "Create"])->name('create');
-        Route::get('/{order:order_id}/edit', [SPDController::class, "Edit"])->name('edit');
-        Route::post('/{user:user_id}', [SPDController::class, "Store"])->name('store');
-        Route::patch('/{order:order_id}', [SPDController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
+        
+        // route pilih surat
+        Route::get('/choose', function(){
+            return view('choose.index');
+        })->name('choose.index');
+    
+        // route grup surat pengunduran diri
+        Route::group([
+            "prefix" => "spd",
+            "as" => "spd."
+        ], function(){
+            Route::get('/', [SPDController::class, "Create"])->name('create');
+            Route::get('/{order:order_id}/edit', [SPDController::class, "Edit"])->name('edit');
+            Route::post('/{user:user_id}', [SPDController::class, "Store"])->name('store');
+            Route::patch('/{order:order_id}', [SPDController::class, "Update"])->name('update');
+            Route::delete('/{order:order_id}', [SPDController::class, "Delete"])->name('delete');
+        });
+    
+        // route grup surat kuasa
+        Route::group([
+            "prefix" => "sk",
+            "as" => "sk."
+        ], function(){
+            Route::get('/', [SKController::class, "Create"])->name('create');
+            Route::get('/{order:order_id}/edit', [SKController::class, "Edit"])->name('edit');
+            Route::post('/{user:user_id}', [SKController::class, "Store"])->name('store');
+            Route::patch('/{order:order_id}', [SKController::class, "Update"])->name('update');
+            Route::delete('/{order:order_id}', [SKController::class, "Delete"])->name('delete');
+        });
+    
+        // route grup surat permohonan maaf
+        Route::group([
+            "prefix" => "spm",
+            "as" => "spm."
+        ], function(){
+            Route::get('/', [SPMController::class, "Create"])->name('create');
+            Route::get('/{order:order_id}/edit', [SPMController::class, "Edit"])->name('edit');
+            Route::post('/{user:user_id}', [SPMController::class, "Store"])->name('store');
+            Route::patch('/{order:order_id}', [SPMController::class, "Update"])->name('update');
+            Route::delete('/{order:order_id}', [SPMController::class, "Delete"])->name('delete');
+        });
+    
+        // route grup surat izin tidak masuk kerja
+        Route::group([
+            "prefix" => "sitmk",
+            "as" => "sitmk."
+        ], function(){
+            Route::get('/', [SITMKController::class, "Create"])->name('create');
+            Route::get('/{order:order_id}/edit', [SITMKController::class, "Edit"])->name('edit');
+            Route::post('/{user:user_id}', [SITMKController::class, "Store"])->name('store');
+            Route::patch('/{order:order_id}', [SITMKController::class, "Update"])->name('update');
+            Route::delete('/{order:order_id}', [SITMKController::class, "Delete"])->name('delete');
+        });
+    
+        // route grup surat lamaran pekerjaan
+        Route::group([
+            "prefix" => "slp",
+            "as" => "slp."
+        ], function(){
+            Route::get('/', [SLPController::class, "Create"])->name('create');
+            Route::get('/{order:order_id}/edit', [SLPController::class, "Edit"])->name('edit');
+            Route::post('/{user:user_id}', [SLPController::class, "Store"])->name('store');
+            Route::patch('/{order:order_id}', [SLPController::class, "Update"])->name('update');
+            Route::delete('/{order:order_id}', [SLPController::class, "Delete"])->name('delete');
+        });
+        
     });
 
-    // route grup surat kuasa
-    Route::group([
-        "prefix" => "sk",
-        "as" => "sk."
-    ], function(){
-        Route::get('/', [SKController::class, "Create"])->name('create');
-        Route::get('/{order:order_id}/edit', [SKController::class, "Edit"])->name('edit');
-        Route::post('/{user:user_id}', [SKController::class, "Store"])->name('store');
-        Route::patch('/{order:order_id}', [SKController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SKController::class, "Delete"])->name('delete');
-    });
-
-    // route grup surat permohonan maaf
-    Route::group([
-        "prefix" => "spm",
-        "as" => "spm."
-    ], function(){
-        Route::get('/', [SPMController::class, "Create"])->name('create');
-        Route::get('/{order:order_id}/edit', [SPMController::class, "Edit"])->name('edit');
-        Route::post('/{user:user_id}', [SPMController::class, "Store"])->name('store');
-        Route::patch('/{order:order_id}', [SPMController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SPMController::class, "Delete"])->name('delete');
-    });
-
-    // route grup surat izin tidak masuk kerja
-    Route::group([
-        "prefix" => "sitmk",
-        "as" => "sitmk."
-    ], function(){
-        Route::get('/', [SITMKController::class, "Create"])->name('create');
-        Route::get('/{order:order_id}/edit', [SITMKController::class, "Edit"])->name('edit');
-        Route::post('/{user:user_id}', [SITMKController::class, "Store"])->name('store');
-        Route::patch('/{order:order_id}', [SITMKController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SITMKController::class, "Delete"])->name('delete');
-    });
-
-    // route grup surat lamaran pekerjaan
-    Route::group([
-        "prefix" => "slp",
-        "as" => "slp."
-    ], function(){
-        Route::get('/', [SLPController::class, "Create"])->name('create');
-        Route::get('/{order:order_id}/edit', [SLPController::class, "Edit"])->name('edit');
-        Route::post('/{user:user_id}', [SLPController::class, "Store"])->name('store');
-        Route::patch('/{order:order_id}', [SLPController::class, "Update"])->name('update');
-        Route::delete('/{order:order_id}', [SLPController::class, "Delete"])->name('delete');
-    });
 
     // route halaman feedback
     Route::group([
