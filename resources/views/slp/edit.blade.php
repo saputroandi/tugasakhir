@@ -26,14 +26,14 @@
         <span class="text-xs text-red-600">@error('nama_slp') {{ $message }} @enderror</span>
       </div>
 
-      <div class="flex gap-2 mx-8 mb-1">
-        <div class="w-1/2">
+      <div class="flex flex-col md:flex-row gap-2 mx-8 mb-1">
+        <div class="w-full md:w-1/2">
           <label for="tmpt_lahir_slp">Tempat Lahir</label>
           <input type="text" name="tmpt_lahir_slp" id="tmpt_lahir_slp" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
           placeholder="Jakarta" value="{{ $slp->tmpt_lahir_slp }}">
           <span class="text-xs text-red-600">@error('tmpt_lahir_slp') {{ $message }} @enderror</span>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <label for="tgl_lahir_slp">Tanggal Lahir</label>
           <input type="date" name="tgl_lahir_slp" id="tgl_lahir_slp" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $slp->tgl_lahir_slp }}">
           <span class="text-xs text-red-600">@error('tgl_lahir_slp') {{ $message }} @enderror</span>
@@ -104,14 +104,14 @@
         <span class="text-xs text-red-600">@error('penerima_slp') {{ $message }} @enderror</span>
       </div>
 
-      <div class="flex gap-2 mx-8">
-        <div class="w-1/2">
+      <div class="flex flex-col md:flex-row gap-2 mx-8">
+        <div class="w-full md:w-1/2">
           <label for="tmpt_slp_terbit">Tempat Surat Lamaran Terbit</label>
           <input type="text" name="tmpt_slp_terbit" id="tmpt_slp_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
           placeholder="Jakarta" value="{{ $slp->tmpt_slp_terbit }}">
           <span class="text-xs text-red-600">@error('tmpt_slp_terbit') {{ $message }} @enderror</span>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <label for="tgl_slp_terbit">Tanggal Surat Lamaran Terbit</label>
           <input type="date" name="tgl_slp_terbit" id="tgl_slp_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $slp->tgl_slp_terbit }}">
           <span class="text-xs text-red-600">@error('tgl_slp_terbit') {{ $message }} @enderror</span>

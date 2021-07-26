@@ -24,14 +24,14 @@
           <input type="text" name="nama_spd" id="nama_spd" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $spd->nama_spd }}">
           <span class="text-xs text-red-600">@error('nama_spd') {{ $message }} @enderror</span>
         </div>
-        <div class="flex gap-2 mx-8 mb-1">
-          <div class="w-1/2">
+        <div class="flex flex-col md:flex-row gap-2 mx-8 mb-1">
+          <div class="w-full md:w-1/2">
             <label for="perusahaan_spd">Nama Perusahaan</label>
             <input type="text" name="perusahaan_spd" id="perusahaan_spd" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
             value="{{ $spd->perusahaan_spd }}">
             <span class="text-xs text-red-600">@error('perusahaan_spd') {{ $message }} @enderror</span>
           </div>
-          <div class="w-1/2">
+          <div class="w-full md:w-1/2">
             <label for="jabatan_spd">Jabatan</label>
             <input type="text" name="jabatan_spd" id="jabatan_spd" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
             value="{{ $spd->jabatan_spd }}">
@@ -49,13 +49,13 @@
           value="{{ $spd->penerima_spd }}">
           <span class="text-xs text-red-600">@error('penerima_spd') {{ $message }} @enderror</span>
         </div>
-        <div class="flex gap-2 mx-8 mb-2">
-          <div class="w-1/2">
+        <div class="flex flex-col md:flex-row gap-2 mx-8 mb-2">
+          <div class="w-full md:w-1/2">
             <label for="tmpt_spd_terbit">Dimana Surat Ini Di Terbitkan</label>
             <input type="text" name="tmpt_spd_terbit" id="tmpt_spd_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $spd->tmpt_spd_terbit }}">
             <span class="text-xs text-red-600">@error('tmpt_spd_terbit') {{ $message }} @enderror</span>
           </div>
-          <div class="w-1/2">
+          <div class="w-full md:w-1/2">
             <label for="tgl_spd_terbit">Kapan Surat Ini Di Terbitkan</label>
             <input type="date" name="tgl_spd_terbit" id="tgl_spd_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $spd->tgl_spd_terbit }}">
             <span class="text-xs text-red-600">@error('tgl_spd_terbit') {{ $message }} @enderror</span>

@@ -23,14 +23,14 @@
         <input type="text" name="nama_sk" id="nama_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "  value="{{ $sk->nama_sk }}">
         <span class="text-xs text-red-600">@error('nama_sk') {{ $message }} @enderror</span>
       </div>
-      <div class="flex gap-2 mx-8 mb-1">
-        <div class="w-1/2">
+      <div class="flex flex-col md:flex-row gap-2 mx-8 mb-1">
+        <div class="w-full md:w-1/2">
           <label for="tmpt_lahir_sk">Tempat Lahir</label>
           <input type="text" name="tmpt_lahir_sk" id="tmpt_lahir_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
           value="{{ $sk->tmpt_lahir_sk }}">
           <span class="text-xs text-red-600">@error('tmpt_lahir_sk') {{ $message }} @enderror</span>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <label for="tgl_lahir_sk">Tanggal Lahir</label>
           <input type="date" name="tgl_lahir_sk" id="tgl_lahir_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $sk->tgl_lahir_sk }}">
           <span class="text-xs text-red-600">@error('tgl_lahir_sk') {{ $message }} @enderror</span>
@@ -62,14 +62,15 @@
         <input type="text" name="nama_penerima_sk" id="nama_penerima_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $sk->nama_penerima_sk }}">
         <span class="text-xs text-red-600">@error('nama_penerima_sk') {{ $message }} @enderror</span>
       </div>
-      <div class="flex gap-2 mx-8 mb-1">
-        <div class="w-1/2">
+
+      <div class="flex flex-col md:flex-row gap-2 mx-8 mb-1">
+        <div class="w-full md:w-1/2">
           <label for="tmpt_lahir_penerima_sk">Tempat Lahir Penerima Kuasa</label>
           <input type="text" name="tmpt_lahir_penerima_sk" id="tmpt_lahir_penerima_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
           placeholder="PT. Buat Surat" value="{{ $sk->tmpt_lahir_penerima_sk }}">
           <span class="text-xs text-red-600">@error('tmpt_lahir_penerima_sk') {{ $message }} @enderror</span>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <label for="tgl_lahir_penerima_sk">Tanggal Lahir Penerima Kuasa</label>
           <input type="date" name="tgl_lahir_penerima_sk" id="tgl_lahir_penerima_sk" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $sk->tgl_lahir_penerima_sk }}">
           <span class="text-xs text-red-600">@error('tgl_lahir_penerima_sk') {{ $message }} @enderror</span>
@@ -101,14 +102,14 @@
         <span class="text-xs text-red-600">@error('keperluan_sk') {{ $message }} @enderror</span>
       </div>
 
-      <div class="flex gap-2 mx-8">
-        <div class="w-1/2">
+      <div class="flexflex-col md:flex-row gap-2 mx-8">
+        <div class="w-full md:w-1/2">
           <label for="tmpt_sk_terbit">Tempat Surat Kuasa Terbit</label>
           <input type="text" name="tmpt_sk_terbit" id="tmpt_sk_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
           placeholder="Jakarta" value="{{ $sk->tmpt_sk_terbit }}">
           <span class="text-xs text-red-600">@error('tmpt_sk_terbit') {{ $message }} @enderror</span>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <label for="tgl_sk_terbit">Tanggal Surat Kuasa Terbit</label>
           <input type="date" name="tgl_sk_terbit" id="tgl_sk_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ $sk->tgl_sk_terbit }}">
           <span class="text-xs text-red-600">@error('tgl_sk_terbit') {{ $message }} @enderror</span>

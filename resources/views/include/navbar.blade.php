@@ -48,8 +48,9 @@
       @endcan
       @can ('not_confirm_payment_yet')
         <a href="{{ route('payment.confirmation') }}" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Konfirmasi Pembayaran</a>
+        @endcan
       @endcan
-    @endcan
+    <a href="{{ route('feedback.create') }}" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Feedback</a>
     <form action="{{ route("auth.logout") }}" method="post">
       @csrf
     <button type="submit" class="p-2 w-96 hover:bg-gray-600 hover:text-white text-center rounded font-medium">Logout</button>

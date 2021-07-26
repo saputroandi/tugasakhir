@@ -72,7 +72,6 @@ class SPDController extends Controller
     public function Update(Order $order, Request $request)
     {
         $request->validate([
-            "nama_order"      => "required",
             "nama_spd"        => "required",
             "perusahaan_spd"  => "required",
             "jabatan_spd"     => "required",

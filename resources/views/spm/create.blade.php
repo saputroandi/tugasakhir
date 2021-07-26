@@ -57,14 +57,14 @@
           <span class="text-xs text-red-600">@error('penerima_spm') {{ $message }} @enderror</span>
         </div>
         
-        <div class="flex gap-2 mx-8 mb-2">
-          <div class="w-1/2">
+        <div class="flex flex-col md:flex-row gap-2 mx-8 mb-2">
+          <div class="w-full md:w-1/2">
             <label for="tmpt_spm_terbit">Dimana Surat Ini Di Terbitkan</label>
             <input type="text" name="tmpt_spm_terbit" id="tmpt_spm_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded "
             placeholder="Jakarta" value="{{ old("tmpt_spm_terbit") }}">
             <span class="text-xs text-red-600">@error('tmpt_spm_terbit') {{ $message }} @enderror</span>
           </div>
-          <div class="w-1/2">
+          <div class="w-full md:w-1/2">
             <label for="tgl_spm_terbit">Kapan Surat Ini Di Terbitkan</label>
             <input type="date" name="tgl_spm_terbit" id="tgl_spm_terbit" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded " value="{{ old("tgl_spm_terbit") }}">
             <span class="text-xs text-red-600">@error('tgl_spm_terbit') {{ $message }} @enderror</span>
