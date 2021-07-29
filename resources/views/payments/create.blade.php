@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="flex flex-col justify-center items-center h-screen max-w-full">
+<div class="flex flex-col justify-center items-center mt-5 max-w-full">
   <p class="w-11/12 text-center text-xl font-semibold md:text-3xl">Pilih Paket Member</p>
   <div class="w-11/12 p-2 mt-2 rounded bg-yellow-300">
     <p class="text-center font-semibold text-red-500">PERHATIAN</p>

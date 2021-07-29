@@ -8,7 +8,7 @@
     <title>{{ $title ?? config('app.name') }}</title>
 </head>
 <body class="bg-buatbody">
-    <div class="">
+    <div class="flex justify-center">
         @yield("content-surat")
     </div>
     @include('include.script')
