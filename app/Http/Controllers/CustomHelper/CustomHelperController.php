@@ -60,4 +60,41 @@ class CustomHelperController extends Controller
 
         }
     }
+
+    public static function namaSuratGenerator($orders)
+    {
+        $namaSurat = collect([]);
+
+        foreach ($orders as $key => $value) {
+            $dataNamaOrder = Str::of($value->nama_order)->explode('_')[0];
+
+            switch ($dataNamaOrder) {
+                case 'spd':
+                    $namaSurat->push('Surat Pengunduran Diri');
+                    break;
+
+                case 'sk':
+                    $namaSurat->push('Surat Kuasa');
+                    break;
+
+                case 'spm':
+                    $namaSurat->push('Surat Permohonan Maaf');
+                    break;
+
+                case 'sitmk':
+                    $namaSurat->push('Surat Izin Tidak Masuk Kerja');
+                    break;
+
+                case 'slp':
+                    $namaSurat->push('Surat Lamaran Pekerjaan');
+                    break;
+                
+                default:
+                    return abort(404);
+                    break;
+            }
+        }
+
+        return $namaSurat;
+    }
 }

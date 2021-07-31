@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomHelper\CustomHelperController;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,37 +15,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $orders = Order::where('user_id', $user->user_id)->orderBy('order_id', 'desc')->get();
-        $namaSurat = collect([]);
-
-        foreach ($orders as $key => $value) {
-            $dataNamaOrder = Str::of($value->nama_order)->explode('_')[0];
-
-            switch ($dataNamaOrder) {
-                case 'spd':
-                    $namaSurat->push('Surat Pengunduran Diri');
-                    break;
-
-                case 'sk':
-                    $namaSurat->push('Surat Kuasa');
-                    break;
-
-                case 'spm':
-                    $namaSurat->push('Surat Permohonan Maaf');
-                    break;
-
-                case 'sitmk':
-                    $namaSurat->push('Surat Izin Tidak Masuk Kerja');
-                    break;
-
-                case 'slp':
-                    $namaSurat->push('Surat Lamaran Pekerjaan');
-                    break;
-                
-                default:
-                    return abort(404);
-                    break;
-            }
-        }
+        $namaSurat = CustomHelperController::namaSuratGenerator($orders);
 
         return view('user.dashboard', compact(['orders', 'namaSurat']));
         // $now              = date("Ymd",time());

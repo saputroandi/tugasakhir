@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomHelper\CustomHelperController;
+use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,9 @@ class AdminController extends Controller
 
     public function AllDocument()
     {
-        return view('admin.all_document');
+        $orders = Order::all();
+        $namaSurat = CustomHelperController::namaSuratGenerator($orders);
+        return view('admin.all_document', compact(['orders', 'namaSurat']));
     }
 
     public function Users()
