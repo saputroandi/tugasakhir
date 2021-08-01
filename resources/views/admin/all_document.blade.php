@@ -21,13 +21,13 @@
         <div class="flex flex-col w-full p-4 bg-buatbody rounded gap-3">
           {{-- header --}}
           <div class="flex w-full py-2 bg-gray-400 rounded">
-            <div class="flex justify-center w-1/3">
+            <div class="hidden md:flex justify-center w-1/3">
               <p class="font-semibold">No</p>
             </div>
-            <div class="flex justify-center w-1/3">
+            <div class="flex justify-center w-1/2 md:w-1/3">
               <p class="font-semibold">Nama Surat</p>
             </div>
-            <div class="flex justify-center w-1/3">
+            <div class="flex justify-center w-1/2 md:w-1/3">
               <p class="font-semibold">Action</p>
             </div>
           </div>
@@ -39,15 +39,15 @@
           @endphp
           {{-- data --}}
           <div class="flex w-full hover:bg-buatbgkomponen rounded">
-            <div class="flex justify-center items-center p-2 w-1/3">
+            <div class="hidden md:flex justify-center items-center p-2 w-1/3">
               <p>{{ $loop->iteration }}</p>
             </div>
-            <div class="flex flex-col justify-center p-2 w-1/3">
-              <p class="font-semibold text-xl">{{$namaOrder}}</p>
-              <p class="font-light text-sm">{{$namaSurat[$key]}}</p>
+            <div class="flex flex-col justify-center p-2 w-1/2 md:w-1/3">
+              <p class="font-semibold text-xl text-center md:text-justify">{{$namaOrder}}</p>
+              <p class="font-light text-sm text-center md:text-justify">{{$namaSurat[$key]}}</p>
             </div>
-            <div class="flex justify-center items-center p-2 w-1/3 gap-3">
-              <form action="{{ '/'.$slugSurat.'/'.$order->order_id }}" method="post">
+            <div class="flex justify-center items-center p-2 w-1/2 md:w-1/3 gap-3">
+              <form action="{{ route('admin.deleteOrder', ['order' => $order->order_id]) }}" method="post">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="hidden md:block p-3 rounded bg-red-500" onclick="return confirm('Anda yakin ingin menghapus surat ini ?')">Delete</button>

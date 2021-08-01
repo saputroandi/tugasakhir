@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [AdminController::class, "Index"])->name("index");
         Route::get('/all-document', [AdminController::class, "AllDocument"])->name("all_document");
         Route::get('/users', [AdminController::class, "Users"])->name("users");
+        Route::delete('/users/{user:user_id}', [AdminController::class, "deleteUser"])->name("deleteUser");
+        Route::delete('/orders/{order:order_id}', [AdminController::class, "deleteOrder"])->name("deleteOrder");
     });
 
     // users

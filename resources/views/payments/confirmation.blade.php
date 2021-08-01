@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- {{dd(Auth::user()->user_id,Auth::user()->payments->last()->payment_id)}} --}}
-<div class="flex w-full h-screen justify-center items-center">
+<div class="flex w-full h-screen justify-center items-center my-6 md:my-0">
   <div class="flex flex-col p-4 w-10/12 bg-buatbgkomponen gap-2 rounded-md">
     <p class="text-center font-medium text-3xl">Konfirmasi Pembayaran</p>
     <div class="flex flex-col justify-center py-2 mx-8 border-solid border-1 border-black bg-yellow-200 rounded-md">
