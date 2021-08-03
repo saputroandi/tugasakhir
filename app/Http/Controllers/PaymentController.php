@@ -7,6 +7,7 @@ use App\Mail\VerificationMail;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -32,14 +33,16 @@ class PaymentController extends Controller
         $role = "2";
 
         $payment->payment_id = CustomHelperController::IdGenerator($lastPayment, $primaryKey, $role);
-        
+
         $payment->save();
 
-        $note = url('/') . '/payment-confirmation/' . $user->user_id;
-        $note2 = 'Simpan bukti transaksi anda untuk dijadikan sebagai bukti pembayaran yang akan di upload pada halaman konfirmasi pembayaran sesuai tautan di atas.';
+        $title   = 'Konfirmasi pembayaran anda dengan meng-klik tautan dibawah ini: ';
+        $note    = route('payment.confirmation');
+        $note2   = 'Simpan bukti transaksi anda untuk dijadikan sebagai bukti pembayaran yang akan di upload pada halaman konfirmasi pembayaran sesuai tautan di atas.';
+
         $details = [
-            'title' => 'Konfirmasi pembayaran anda dengan meng-klik tautan dibawah ini: ',
-            'note' => $note,
+            'title' => $title,
+            'note'  => $note,
             'note2' => $note2,
         ];
 
@@ -61,14 +64,16 @@ class PaymentController extends Controller
         ]);
 
         $uploadedFile = $request->file("proof_of_payment");
-        
+
         $filenameWithExt = $request->file("proof_of_payment")->getClientOriginalName();
         $extension = $request->file("proof_of_payment")->getClientOriginalExtension();
 
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $saved_filename = Str::remove(' ', $filename)."_".time().".".$extension;
+        $saved_filename = Str::remove(' ', $filename) . "_" . time() . "." . $extension;
         $path = Storage::putFileAs(
-            'public/proof_of_payment', $uploadedFile, $saved_filename
+            'public/proof_of_payment',
+            $uploadedFile,
+            $saved_filename
         );
 
         // update payment
@@ -103,7 +108,7 @@ class PaymentController extends Controller
 
     public function PaymentDenied(User $user, Payment $payment)
     {
-        
+
         Storage::delete('public/proof_of_payment/' . $payment->proof_of_payment);
         $payment->payment_status = 1;
         $payment->proof_of_payment = null;
@@ -122,5 +127,4 @@ class PaymentController extends Controller
 
         return redirect('/admin')->with('fail', 'Pembayaran di tolak');
     }
-    
 }

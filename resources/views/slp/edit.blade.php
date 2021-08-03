@@ -63,7 +63,7 @@
       </div>
 
       <div class="mx-8 mb-1">
-        <label for="email_slp">Pendidikan Terakhir</label>
+        <label for="email_slp">Email</label>
         <input type="text" name="email_slp" id="email_slp" class="w-full p-2 border-2 border-buatborder bg-buatbody rounded" placeholder="email@gmail.com" value="{{ $slp->email_slp }}">
         <span class="text-xs text-red-600">@error('email_slp') {{ $message }} @enderror</span>
       </div>

@@ -16,6 +16,7 @@ class UserController extends Controller
         $user = Auth::user();
         $orders = Order::where('user_id', $user->user_id)->orderBy('order_id', 'desc')->get();
         $namaSurat = CustomHelperController::namaSuratGenerator($orders);
+        // dd(route('payment.confirmation', ['user_id' => Auth::user()->user_id]));
 
         return view('user.dashboard', compact(['orders', 'namaSurat']));
         // $now              = date("Ymd",time());

@@ -19,8 +19,13 @@ class AuthController extends Controller
         $data = [
             "title" => "Login",
         ];
-        
-        return view( "auth.login", $data );
+
+        if (url()->previous() == route('payment.confirmation')) {
+            session_start();
+            $_SESSION["paymentConfirmation"] = 1;
+        };
+
+        return view("auth.login", $data);
     }
 
     public function Register()
@@ -29,15 +34,15 @@ class AuthController extends Controller
             "title" => "Register",
         ];
 
-        return view( "auth.register", $data );
+        return view("auth.register", $data);
     }
 
     public function RegisterUser(Request $request)
     {
         $request->validate([
-            "nama"=>"required",
-            "email"=>"required|email|unique:users,email",
-            "password"=>"required|confirmed|min:6|max:12"
+            "nama" => "required",
+            "email" => "required|email|unique:users,email",
+            "password" => "required|confirmed|min:6|max:12"
         ]);
 
         $user = new User;
@@ -48,7 +53,7 @@ class AuthController extends Controller
 
         $lastUser = User::all()->last();
         $role = "2";
-        
+
         $user->user_id = CustomHelperController::IdGenerator($lastUser, 'user_id', $role);
         // dd($user->user_id);
 
@@ -57,16 +62,16 @@ class AuthController extends Controller
         $UserNotConfirmedEmailYet = User::where('email', $request->email)->first();
 
         $title = 'Konfirmasi email anda dengan meng-klik tautan dibawah ini: ';
-        $detailsMailBody = url('/') . '/email-confirmation/' . $UserNotConfirmedEmailYet->user_id ;
+        $detailsMailBody = url('/') . '/email-confirmation/' . $UserNotConfirmedEmailYet->user_id;
 
         $details = [
-        'title' => $title,
-        'note' => $detailsMailBody,
+            'title' => $title,
+            'note' => $detailsMailBody,
         ];
 
         Mail::to($request->email)->send(new VerificationMail($details));
 
-        if($query){
+        if ($query) {
             return back()->with('success', 'Anda telah berhasil mendaftar silahkan cek email untuk verifikasi');
         } else {
             return back()->with('fail', 'Gagal mendaftar, terjadi kesalahan');
@@ -76,16 +81,35 @@ class AuthController extends Controller
     public function LoginUser(Request $request)
     {
         $user = $request->validate([
-            "email"=>"required",
-            "password"=>"required|min:6|max:12",
+            "email" => "required",
+            "password" => "required|min:6|max:12",
         ]);
 
+        session_start();
+
         if (Auth::attempt($user)) {
+
+            if (Auth::user()->email_verifikasi == false) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->with('fail', 'Harap verifikasi email terlebih dahulu');
+            };
+
             $request->session()->regenerate();
-            
-            if(Str::substr(Auth::user()->user_id, 0, 1) == 1){
+
+            if (Str::substr(Auth::user()->user_id, 0, 1) == 1) {
                 return redirect('/admin');
             } else {
+
+                if (count($_SESSION) > 0 && $_SESSION["paymentConfirmation"] === 1) {
+                    $_SESSION;
+                    session_unset();
+                    session_destroy();
+                    return redirect()->route('payment.confirmation');
+                };
+
                 return redirect('/dashboard');
             }
         }
@@ -99,6 +123,12 @@ class AuthController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        session_start();
+
+        session_unset();
+
+        session_destroy();
 
         return redirect('/auth/login');
     }

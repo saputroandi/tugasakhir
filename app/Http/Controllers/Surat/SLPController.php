@@ -59,7 +59,7 @@ class SLPController extends Controller
         $role       = '2';
 
         $order['order_id']   = CustomHelperController::IdGenerator($lastRecord, $primaryKey, $role);
-        $order['nama_order'] = $this->orderName.$request->nama_order;
+        $order['nama_order'] = $this->orderName . $request->nama_order;
         $order['user_id']    = $user->user_id;
         Order::create($order);
 
@@ -85,8 +85,7 @@ class SLPController extends Controller
         $slp['order_id'] = $order['order_id'];
         SLP::create($slp);
 
-        foreach ($request->lampiran as $index => $value)
-        {
+        foreach ($request->lampiran as $index => $value) {
             $lampiranLastRecord = Lampiran::all()->last();
             $lampiranPrimaryKey = 'lampiran_id';
             $lampiranId         = CustomHelperController::IdGenerator($lampiranLastRecord, $lampiranPrimaryKey, $role);
@@ -97,7 +96,7 @@ class SLPController extends Controller
                 'nama_lampiran' => $request->lampiran[$index],
             );
 
-            if($request->lampiran[$index] == null) continue;
+            if ($request->lampiran[$index] == null) continue;
 
             Lampiran::create($dataLampiran);
         }
@@ -130,28 +129,25 @@ class SLPController extends Controller
         $order->load(['slps']);
         $order->slps->load(['lampirans']);
 
-        foreach($order->slps as $key => $slp)
-        {
-            foreach($slp->lampirans as $i => $v)
-            {
+        foreach ($order->slps as $key => $slp) {
+            foreach ($slp->lampirans as $i => $v) {
                 $v->delete();
             }
 
-            foreach ($request->lampiran as $index => $value)
-            {
+            foreach ($request->lampiran as $index => $value) {
                 $lampiranLastRecord = Lampiran::all()->last();
                 $lampiranPrimaryKey = 'lampiran_id';
                 $role               = '2';
                 $lampiranId         = CustomHelperController::IdGenerator($lampiranLastRecord, $lampiranPrimaryKey, $role);
-    
+
                 $dataLampiran       = array(
                     'lampiran_id'   => $lampiranId,
                     'slp_id'        => $slp->slp_id,
                     'nama_lampiran' => $request->lampiran[$index],
                 );
-    
-                if($request->lampiran[$index] == null) continue;
-    
+
+                if ($request->lampiran[$index] == null) continue;
+
                 Lampiran::create($dataLampiran);
             }
         }
